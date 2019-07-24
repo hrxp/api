@@ -29,7 +29,7 @@ API and backend for the HRX Project
 
 | Endpoint                                                                   | METHOD | Description                       | Completed |
 | -------------------------------------------------------------------------- | ------ | --------------------------------- | :-------: |
-| [`/channels`](##/channels)                                                  | GET    | All channels                      |           |
+| [`/channels`](#/channels)                                                  | GET    | All channels                      |           |
 | [`/channels/:channel_id`](#/channels/:channel_id)                          | GET    | Specific channel                  |           |
 | [`/channels/:channel_id/msgs`](#/channels/:channel_id/msgs)                | GET    | All msgs for specific channel     |           |
 | [`/channels/:channel_id/msgs/:msg_id`](#/channels/:channel_id/msgs/msg_id) | GET    | A specific message in the channel |           |
@@ -61,7 +61,7 @@ API and backend for the HRX Project
 
 Below are all expected request body shapes and data responses
 
-## `/channels`
+## /channels
 
 **Method:** GET
 
