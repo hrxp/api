@@ -32,6 +32,7 @@ API and backend for the HRX Project
 | Endpoint            | METHOD | Description | Completed |
 | ------------------- | ------ | ----------- | :-------: |
 | [`/hello`](#/hello) | GET    |             |     X     |
+| []()                | GET    |             |           |
 
 ### Users
 
@@ -45,6 +46,7 @@ API and backend for the HRX Project
 | Endpoint                   | METHOD | Description | Completed |
 | -------------------------- | ------ | ----------- | :-------: |
 | [`/messages` ](#/messages) | GET    |             |           |
+| []()                       | GET    |             |           |
 
 # Data requests and responses
 
@@ -143,15 +145,3 @@ Structure of response:
 ```
 
 [Back to table of Contents](#table-of-contents)
-
-actions:
-
-CRUD for:
-
-- priority
-- priority type
-- priority level
-- user
-- organization
-- organization type
-- event
