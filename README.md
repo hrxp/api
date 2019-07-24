@@ -7,10 +7,6 @@ API and backend for the HRX Project
 - [Getting Started](#getting-started)
 - [Database Tables](#database-tables)
   - [Schema](#schema)
-  - [User](#user)
-  - [User_Type](#user_type)
-  - [Organization_Contact](#organization_contact)
-  - [Organization_Owner](#organization_owner)
 - [Endpoints](#endpoints)
 - [Data requests and responses](#Data-requests-and-responses)
 
