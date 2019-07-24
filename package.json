@@ -1,0 +1,27 @@
+{
+  "name": "hrxp-api",
+  "version": "1.0.0",
+  "description": "This is the api for the hrxp slack archive",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrxp/api.git"
+  },
+  "author": "HRX",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrxp/api/issues"
+  },
+  "homepage": "https://github.com/hrxp/api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.1"
+  }
+}
