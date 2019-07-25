@@ -1,6 +1,6 @@
 # hrxp-api
 
-API and backend for the HRX Project
+API and backend for the HRX Project.
 
 ## Table of Contents
 
@@ -12,8 +12,8 @@ API and backend for the HRX Project
 
 # Getting Started
 
-- Run `npm i` from the command line
-- Run `npm start`
+- Run `npm i` from the command line.
+- Run `npm start`.
 
 # Database Tables
 
@@ -46,13 +46,13 @@ API and backend for the HRX Project
 
 # Data requests and responses
 
-Below are all expected request body shapes and data responses
+Below are all expected request data responses.
 
 ## `/channels`
 
 **Method:** GET
 
-Structure of request
+Structure of request:
 
 ```
 {
@@ -72,11 +72,11 @@ Structure of response:
 
 [Back to table of Contents](#table-of-contents)
 
-## `/usres`
+## `/users`
 
 **Method:** GET
 
-Structure of request
+Structure of request:
 
 ```
 {
@@ -100,7 +100,7 @@ Structure of response:
 
 **Method:** GET
 
-Structure of request
+Structure of request:
 
 ```
 {
