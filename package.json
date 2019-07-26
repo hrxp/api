@@ -19,7 +19,9 @@
   "homepage": "https://github.com/hrxp/api#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^3.3.0-beta2",
+    "mongoose": "^5.6.7"
   },
   "devDependencies": {
     "morgan": "^1.9.1"
