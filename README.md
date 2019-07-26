@@ -14,8 +14,8 @@ API and backend for the HRX Project
 
 # Getting Started
 
-- Run `npm i` from the command line
-- Run `npm start`
+- Install npm packages by running `npm i` from the command line
+- Start the server for the backe by running `npm start`
 
 # Database Tables
 
