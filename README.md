@@ -61,7 +61,7 @@ API and backend for the HRX Project
 
 Below are all expected request body shapes and data responses
 
-## `/channels`
+# /channels
 
 **Method:** GET
 
