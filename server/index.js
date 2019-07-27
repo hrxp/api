@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.use('/hello', channel);
+app.use('/channels', channel);
 
 app.listen(3000, () => {
   console.log('Hido ho, Captn! Listening on port 3000.');
