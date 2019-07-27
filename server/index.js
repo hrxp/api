@@ -16,7 +16,8 @@ app.get('/', (req, res) => {
   res.send('example endpoint');
 });
 
-app.use('/hello', channel);
+// Routes
+app.use('/channels', channel);
 
 app.listen(3000, () => {
   console.log('Hido ho, Captn! Listening on port 3000.');
