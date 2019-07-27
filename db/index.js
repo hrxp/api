@@ -1,12 +1,11 @@
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const { mongoURL } = require('./config');
 
-// const mongoURI = '';
+const db = mongoose.connect(mongoURL, { useNewUrlParser: true });
 
-// const db = mongoose.connect(mongoURI, { useNewUrlParser: true });
+db.then(() => console.log(`Connected to: hrxp-api-database`)).catch(err => {
+  console.log(`There was a problem connecting to mongo at: ${mongoURL}`);
+  console.log(err);
+});
 
-// db.then(db => console.log(`Connected to: ${mongoURI}`)).catch(err => {
-//   console.log(`There was a problem connecting to mongo at: ${mongoURI}`);
-//   console.log(err);
-// });
-
-// module.exports = db;
+module.exports = db;
