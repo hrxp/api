@@ -15,8 +15,11 @@ API and backend for the HRX Project.
 # Getting Started
 
 
-- Install npm packages by running `npm i` from the command line
-- Start the server for the backe by running `npm start`
+- Run `npm i` from the command line
+- Navigate to db/config.example.js and rename to db/config.js
+- Insert the MongoURL into the appropiate spot
+- Run `npm start`
+-
 
 
 # Database Tables
