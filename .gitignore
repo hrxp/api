@@ -62,3 +62,8 @@ typings/
 
 # webpack bundle
 node_modules
+
+# mongoDb config 
+/db/config.js
+
+/notes.md
