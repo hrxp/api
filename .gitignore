@@ -68,3 +68,5 @@ node_modules
 
 /notes.md
 
+#sample routes 
+/db/model/exampleModel.js
