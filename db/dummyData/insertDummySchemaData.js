@@ -29,7 +29,14 @@ const insertDummyData = () => {
         ts: '10:00am',
         text: 'example message',
         channelId: 'a123456',
-        files: [],
+        files: [
+          {
+            id: 'aaaa',
+            displayName: 'cv',
+            fileType: 'pdf',
+            downloadUrl: 'http://download.com/pdf',
+          },
+        ],
         replies: [{ id: 'a1234a', createdBy: 'user1', ts: '10:01am', text: 'example reply' }],
       };
 
@@ -91,3 +98,5 @@ module.exports = {
   insertDummyData,
   deleteDummyData,
 };
+
+insertDummyData();
