@@ -12,7 +12,7 @@ const channelSchema = new mongoose.Schema({
   id: String,
   topic: String,
   purpose: { type: String, unique: true, required: true },
-  memebers: [String],
+  members: [String],
   isArchived: String,
 });
 
