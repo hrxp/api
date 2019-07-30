@@ -21,10 +21,10 @@ const messageSchema = new mongoose.Schema({
   ts: String,
   text: String,
   channelId: String,
-  files: [{ id: String, displayName: String, fileType: String, downLoadUrl: String }],
+  files: [{ id: { type: String, unique: true }, displayName: String, fileType: String, downLoadUrl: String }],
   replies: [
     {
-      id: String,
+      id: { type: String, unique: true },
       createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       ts: String,
       text: String,
