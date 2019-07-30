@@ -25,6 +25,8 @@ const messageSchema = new mongoose.Schema({
     {
       id: String,
       createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      ts: String,
+      text: String,
     },
   ],
   ts: String,
