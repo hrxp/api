@@ -6,7 +6,6 @@ info:
 
 tags:
 - name: Channels
-- name: Messages
 
 paths:
   /channels:
@@ -22,19 +21,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Channel'
-  /channels/{channelId}:
-    parameters:
-    - $ref: "#/components/parameters/channelId"
-    get:
-      tags: [Channels]
-      summary: Return a specific channel
-      responses:
-        200:
-          description: OK; data in response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Channel'
   /channels/{channelId}/messages:
     parameters:
     - $ref: "#/components/parameters/channelId"
