@@ -77,7 +77,7 @@ const deleteDummyData = async () => {
 
       await Channel.deleteOne({ id: dummyChannelId });
       await User.deleteOne({ id: dummyUserId });
-      await Message.deleteOne({ id: dummyUserId });
+      await Message.deleteOne({ id: dummyMessageId });
 
       console.log('Successfully deleted dummy data');
       mongoose.connection.close();
