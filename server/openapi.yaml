@@ -1,0 +1,132 @@
+openapi: "3.0.0"
+
+info:
+  version: 0.0.3
+  title: HRXP Archive API
+
+tags:
+- name: Channels
+
+paths:
+  /channels:
+    get:
+      tags: [Channels]
+      summary: Returns a list of all channels
+      responses:
+        200:
+          description: OK; data in response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Channel'
+  /channels/{channelId}/messages:
+    parameters:
+    - $ref: "#/components/parameters/channelId"
+    get:
+      tags: [Channels]
+      summary: Return a specific channel's messages
+      responses:
+        200:
+          description: OK; data in response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+components:
+  schemas:
+    Channel:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: C035Z8YT7
+        topic:
+          type: string
+          example: Mission 1st, People Always.
+        purpose:
+          type: string
+          example: This channel is for alumni of all Hack Reactor campuses.
+        members:
+          type: array
+          items:
+            $ref: "#/components/schemas/User/properties/id"
+        isArchived:
+          type: boolean
+          default: false
+    Message:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
+        ts:
+          $ref: "#/components/schemas/__Timestamp"
+        text:
+          type: string
+          example: Happy Monday, everyone!
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              id: 
+                type: string
+                example: FJ0UW704E
+              displayName:
+                type: string
+                example: contractor-description.pdf
+              fileType:
+                type: string
+                example: pdf
+              downloadUrl:
+                type: string
+                format: url
+                example: "https://hrxp.com/static/files/FJ0UW704E/contractor-description.pdf"
+        replies:
+          type: array
+          items:
+            properties:
+              id: 
+                type: string
+                example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710b
+              createdBy: 
+                $ref: "#/components/schemas/User"
+              ts:
+                $ref: "#/components/schemas/__Timestamp"
+              text:
+                type: string
+        createdBy:
+          $ref: "#/components/schemas/User"
+    User:
+      type: object
+      properties:
+        id: 
+          type: string
+          example: U07AT4FB4
+        profilePhoto:
+          type: string
+          example: "https://hrxp.com/static/avatars/U07AT4FB4.png"
+        displayName:
+          type: string
+          example: "Kyle Shockey [HR26]"
+        realName:
+          type: string
+          example: Kyle Shockey
+
+    # UTILITY SCHEMAS, which are just broken out for reusability
+
+    __Timestamp:
+      type: string
+      example: "1501536037.682405"
+
+  parameters:
+    channelId:
+      name: channelId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/Channel/properties/id"
