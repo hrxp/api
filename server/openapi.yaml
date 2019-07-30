@@ -50,22 +50,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Message'
-  /channels/{channelId}/messages/{messageId}:
-    parameters:
-    - $ref: "#/components/parameters/channelId"
-    - $ref: "#/components/parameters/messageId"
-    get:
-      tags: [Channels]
-      summary: Return a specific channel's messages
-      responses:
-        200:
-          description: OK; data in response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Message'
 components:
   schemas:
     Channel:
@@ -150,7 +134,6 @@ components:
     __Timestamp:
       type: string
       example: "1501536037.682405"
-      
 
   parameters:
     channelId:
@@ -159,9 +142,3 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/Channel/properties/id"
-    messageId:
-      name: messageId
-      in: path
-      required: true
-      schema:
-        $ref: "#/components/schemas/Message/properties/id"
