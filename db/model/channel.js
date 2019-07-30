@@ -9,7 +9,7 @@
 const mongoose = require('mongoose');
 
 const channelSchema = new mongoose.Schema({
-  id: String,
+  id: { type: String, unique: true },
   topic: String,
   purpose: { type: String, unique: true, required: true },
   memebers: [String],
@@ -17,7 +17,7 @@ const channelSchema = new mongoose.Schema({
 });
 
 const messageSchema = new mongoose.Schema({
-  id: String,
+  id: { type: String, unique: true },
   ts: String,
   text: String,
   channelId: String,
@@ -34,7 +34,7 @@ const messageSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema({
-  id: String,
+  id: { type: String, unique: true },
   profilePhoto: String,
   displayName: String,
   realName: String,
