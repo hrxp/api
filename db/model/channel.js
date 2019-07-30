@@ -52,7 +52,7 @@ module.exports = {
   fetchChannels: async channelId => {
     try {
       // TODO: fetch all the channels from the database
-      const channels = Channel.findById(channelId);
+      const channels = Channel.find();
       return channels;
     } catch (err) {
       return err;
