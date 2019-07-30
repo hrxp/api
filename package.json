@@ -4,6 +4,7 @@
   "description": "This is the api for the hrxp slack archive",
   "main": "server/index.js",
   "scripts": {
+    "openapi:edit": "swagger-editor-live server/openapi.yaml",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js"
   },
@@ -26,6 +27,7 @@
     "swagger-ui-express": "^4.0.7"
   },
   "devDependencies": {
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "swagger-editor-live": "^2.1.8"
   }
 }
