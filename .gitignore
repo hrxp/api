@@ -63,8 +63,8 @@ typings/
 # webpack bundle
 node_modules
 
-# db config
-db/config.js
+# mongoDb config 
+/db/config.js
 
-# notes
-notes.md
+/notes.md
+

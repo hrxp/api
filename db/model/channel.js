@@ -50,11 +50,20 @@ const User = mongoose.model('User', userSchema);
 const Message = mongoose.model('Message', messageSchema);
 
 module.exports = {
-  example: async () => {
+  fetchChannels: async () => {
     try {
-      // const result = await db.query(`select * from test.user ${id ? `where id = ${id}` : ''}`);
-      const result = 'hello world';
-      return result;
+      // TODO: fetch all the channels from the database
+      const results = 'channels';
+      return results;
+    } catch (err) {
+      return err;
+    }
+  },
+  fetchMessages: async channelId => {
+    try {
+      // TODO: fetch all the messages for a specific channel
+      const results = 'channelMessages';
+      return results;
     } catch (err) {
       return err;
     }

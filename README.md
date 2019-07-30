@@ -1,20 +1,19 @@
 # hrxp-api
 
-API and backend for the HRX Project
+API and backend for the HRX Project.
 
 ## Table of Contents
 
 - [Getting Started](#getting-started)
 - [Database Tables](#database-tables)
   - [Schema](#schema)
-  - [User](#user)
-  - [User_Type](#user_type)
-  - [Organization_Contact](#organization_contact)
-  - [Organization_Owner](#organization_owner)
-- [Endpoints](#endpoints)
-- [Data requests and responses](#Data-requests-and-responses)
+- [UI Endpoints](#ui-endpoints)
+- [Ingestor Endpoints](#ingestor-endpoints)
+- [UI Data Requests and Responses](#ui-data-requests-and-responses)
+- [Ingestor Data Requests and Reponses](#ingestor-data-requests-and-responses)
 
 # Getting Started
+
 
 - Run `npm i` from the command line
 - Navigate to db/config.example.js and rename to db/config.js
@@ -22,44 +21,56 @@ API and backend for the HRX Project
 - Run `npm start`
 -
 
+
 # Database Tables
 
 ## Schema
 
 [Back to table of Contents](#table-of-contents)
 
-# Endpoints
+# UI Endpoints
 
 ### Channels
 
-| Endpoint            | METHOD | Description | Completed |
-| ------------------- | ------ | ----------- | :-------: |
-| [`/hello`](#/hello) | GET    |             |     X     |
-| []()                | GET    |             |           |
+| Endpoint                                                                   | METHOD | Description                       | Completed |
+| -------------------------------------------------------------------------- | ------ | --------------------------------- | :-------: |
+| [`/channels`](#/channels)                                                  | GET    | All channels                      |           |
+| [`/channels/:channel_id`](#/channels/:channel_id)                          | GET    | Specific channel                  |           |
+| [`/channels/:channel_id/msgs`](#/channels/:channel_id/msgs)                | GET    | All msgs for specific channel     |           |
+| [`/channels/:channel_id/msgs/:msg_id`](#/channels/:channel_id/msgs/msg_id) | GET    | A specific message in the channel |           |
 
-### Users
+### users
 
-| Endpoint             | METHOD | Description | Completed |
-| -------------------- | ------ | ----------- | :-------: |
-| [`/users` ](#/users) | GET    |             |           |
-| []()                 | GET    |             |           |
+| Endpoint                                                        | METHOD | Description             | Completed |
+| --------------------------------------------------------------- | ------ | ----------------------- | :-------: |
+| [`/users` ](#/users)                                            | GET    | All users               |           |
+| [`/users/:user_id`](#/users/:user_id)                           | GET    | Specific user           |           |
+| [`/users/:user_id/msgs`](#/users/:user_id/msgs)                 | GET    | All msgs for a user     |           |
+| [`/users/:user_id/msgs/:msg_id`](#/users/:user_id/msgs/:msg_id) | GET    | Specific msg for a user |           |
 
-### messages
+# Ingestor Endpoints
 
-| Endpoint                   | METHOD | Description | Completed |
-| -------------------------- | ------ | ----------- | :-------: |
-| [`/messages` ](#/messages) | GET    |             |           |
-| []()                       | GET    |             |           |
+### TBD
 
-# Data requests and responses
+| Endpoint | METHOD | Description | Completed |
+| -------- | ------ | ----------- | :-------: |
 
-Below are all expected request body shapes and data responses
 
-## `/channels`
+### TBD
+
+| Endpoint | METHOD | Description | Completed |
+| -------- | ------ | ----------- | :-------: |
+
+
+# UI data requests and responses
+
+Below are all expected request data responses.
+
+# /channels
 
 **Method:** GET
 
-Structure of request
+Structure of request:
 
 ```
 {
@@ -79,11 +90,13 @@ Structure of response:
 
 [Back to table of Contents](#table-of-contents)
 
-## `/usres`
+## `/channels/:channel_id`
+## `/users`
+
 
 **Method:** GET
 
-Structure of request
+Structure of request:
 
 ```
 {
@@ -103,11 +116,11 @@ Structure of response:
 
 [Back to table of Contents](#table-of-contents)
 
-## `/messages`
+## `/channels/:channel_id/msgs`
 
 **Method:** GET
 
-Structure of request
+Structure of request:
 
 ```
 {
@@ -147,4 +160,138 @@ Structure of response:
 }
 ```
 
+## `/channels/:channel_id`
+
+**Method:** GET
+
+Structure of request
+
+```
+{
+
+}
+```
+
+**HTTP Status:**
+
+Structure of response:
+
+```
+{
+
+}
+```
+
+[Back to table of Contents](#table-of-contents)## `/channels/:channel_id`
+
+## `/channels/:channel_id/msgs/:msg_id
+
+**Method:** GET
+
+Structure of request
+
+```
+{
+
+}
+```
+
+**HTTP Status:**
+
+Structure of response:
+
+```
+{
+
+}
+```
+
+[Back to table of Contents](#table-of-contents)## `/channels/:channel_id`
+
+## `/users`
+
+**Method:** GET
+
+Structure of request
+
+```
+{
+
+}
+```
+
+**HTTP Status:**
+
+Structure of response:
+
+```
+{
+
+}
+```
+
+[Back to table of Contents](#table-of-contents)## `/channels/:channel_id`
+
+## `/users/:user_id`
+
+**Method:** GET
+
+Structure of request
+
+```
+{
+
+}
+```
+
+**HTTP Status:**
+
+Structure of response:
+
+```
+{
+
+}
+```
+
+[Back to table of Contents](#table-of-contents)## `/channels/:channel_id`
+
+## `/users/:user_id/msgs`
+
+**Method:** GET
+
+Structure of request
+
+```
+{
+
+}
+```
+
+[Back to table of Contents](#table-of-contents)## `/channels/:channel_id`
+
+## `/users/:user_id/msgs/:msg_id`
+
+**Method:** GET
+
+Structure of request
+
+```
+{
+
+}
+```
+
+**HTTP Status:**
+
+Structure of response:
+
+```
+{
+
+}
+```
+
 [Back to table of Contents](#table-of-contents)
+
+# Ingestor data requests and responses
