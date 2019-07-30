@@ -5,14 +5,14 @@
 // What type should we use for the timestamp
 // What is the timestamp schema all about?
 // Add dummy data to the database
-
+// Find By messageId.
 const mongoose = require('mongoose');
 
 const channelSchema = new mongoose.Schema({
   id: String,
   topic: String,
   purpose: { type: String, unique: true, required: true },
-  memebers: [String],
+  members: [String],
   isArchived: String,
 });
 
@@ -30,7 +30,6 @@ const messageSchema = new mongoose.Schema({
       text: String,
     },
   ],
-  ts: String,
 });
 
 const userSchema = new mongoose.Schema({
@@ -50,11 +49,11 @@ const User = mongoose.model('User', userSchema);
 const Message = mongoose.model('Message', messageSchema);
 
 module.exports = {
-  fetchChannels: async () => {
+  fetchChannels: async channelId => {
     try {
       // TODO: fetch all the channels from the database
-      const results = 'channels';
-      return results;
+      const channels = Channel.findById(channelId);
+      return channels;
     } catch (err) {
       return err;
     }
@@ -62,10 +61,17 @@ module.exports = {
   fetchMessages: async channelId => {
     try {
       // TODO: fetch all the messages for a specific channel
-      const results = 'channelMessages';
-      return results;
+
+      const messages = Message.find({ channelId: channelId });
+      return messages;
     } catch (err) {
       return err;
     }
   },
+};
+
+module.exports = {
+  channelSchema,
+  messageSchema,
+  userSchema,
 };
