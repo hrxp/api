@@ -71,7 +71,7 @@ module.exports = {
 };
 
 module.exports = {
-  channelSchema,
-  messageSchema,
-  userSchema,
+  Channel,
+  User,
+  Message,
 };
