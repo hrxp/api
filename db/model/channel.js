@@ -21,7 +21,7 @@ const messageSchema = new mongoose.Schema({
   ts: String,
   text: String,
   channelId: String,
-  files: [{ id: String, displayName: String, fileType: String, downLoadUrl: String }],
+  files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
   replies: [
     {
       id: String,
