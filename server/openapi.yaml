@@ -97,6 +97,8 @@ components:
                 $ref: "#/components/schemas/User"
               ts:
                 $ref: "#/components/schemas/__Timestamp"
+              text:
+                type: string
         createdBy:
           $ref: "#/components/schemas/User"
     User:
