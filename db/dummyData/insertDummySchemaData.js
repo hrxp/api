@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 const { mongoURL } = require('../config');
 const { Channel, User, Message } = require('../model/channel.js');
 
-const insertDummyData = () => {
+const insertDummyData = async () => {
   // make a connection
   mongoose.connect(mongoURL, { useNewUrlParser: true });
 
@@ -17,15 +17,15 @@ const insertDummyData = () => {
 
       // Dummy data
       const dummyChannel = {
-        id: 'a123456',
+        id: 'testChannel',
         topic: 'general',
-        purpose: 'general',
+        purpose: 'testChannel',
         members: ['member1', 'member2'],
         isArchived: 'yes',
       };
 
       const dummyMessage = {
-        id: 'a1234',
+        id: 'testMessage',
         ts: '10:00am',
         text: 'example message',
         channelId: 'a123456',
@@ -41,7 +41,7 @@ const insertDummyData = () => {
       };
 
       const dummyUser = {
-        id: 'user1',
+        id: 'testUser',
         profilePhoto: 'http://example.com/photo',
         displayName: 'example name',
         realName: 'John Doe',
@@ -78,9 +78,9 @@ const deleteDummyData = async () => {
       console.log('Connection Successful!');
 
       // dummy id's
-      const dummyChannelId = 'a123456';
-      const dummyMessageId = 'a1234';
-      const dummyUserId = 'user1';
+      const dummyChannelId = 'testChannel';
+      const dummyMessageId = 'testMessage';
+      const dummyUserId = 'testUser';
 
       await Channel.deleteOne({ id: dummyChannelId });
       await User.deleteOne({ id: dummyUserId });
@@ -98,5 +98,3 @@ module.exports = {
   insertDummyData,
   deleteDummyData,
 };
-
-insertDummyData();
