@@ -11,7 +11,7 @@ const insertDummyData = async () => {
 
   db.on('error', console.error.bind(console, 'connection error:'));
 
-  db.once('open', async () => {
+  await db.once('open', async () => {
     try {
       console.log('Connection Successful!');
 
@@ -62,6 +62,7 @@ const insertDummyData = async () => {
       console.log('Error inserting dummy data: ', err);
     }
   });
+  return;
 };
 
 const deleteDummyData = async () => {
@@ -73,7 +74,7 @@ const deleteDummyData = async () => {
 
   db.on('error', console.error.bind(console, 'connection error:'));
 
-  db.once('open', async () => {
+  await db.once('open', async () => {
     try {
       console.log('Connection Successful!');
 
@@ -88,10 +89,12 @@ const deleteDummyData = async () => {
 
       console.log('Successfully deleted dummy data');
       mongoose.connection.close();
+      return;
     } catch (err) {
       console.log('Error deleting dummy data: ', err);
     }
   });
+  return;
 };
 
 module.exports = {
