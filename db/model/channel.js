@@ -12,7 +12,7 @@ const channelSchema = new mongoose.Schema({
   id: { type: String, unique: true },
   topic: String,
   purpose: { type: String, unique: true, required: true },
-  memebers: [String],
+  members: [String],
   isArchived: String,
 });
 
@@ -21,7 +21,7 @@ const messageSchema = new mongoose.Schema({
   ts: String,
   text: String,
   channelId: String,
-  files: [{ id: { type: String, unique: true }, displayName: String, fileType: String, downLoadUrl: String }],
+  files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
   replies: [
     {
       id: { type: String, unique: true },
@@ -50,20 +50,19 @@ const User = mongoose.model('User', userSchema);
 const Message = mongoose.model('Message', messageSchema);
 
 module.exports = {
-  fetchChannels: async () => {
+  fetchChannels: async channelId => {
     try {
       // TODO: fetch all the channels from the database
-      const results = 'channels';
-      return results;
+      const channels = Channel.find();
+      return channels;
     } catch (err) {
       return err;
     }
   },
   fetchMessages: async channelId => {
     try {
-      // TODO: fetch all the messages for a specific channel
-      const results = 'channelMessages';
-      return results;
+      const messages = Message.find({ channelId: channelId });
+      return messages;
     } catch (err) {
       return err;
     }
