@@ -28,6 +28,7 @@ const messageSchema = new mongoose.Schema({
       createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       ts: String,
       text: String,
+      files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
     },
   ],
   ts: String,
