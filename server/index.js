@@ -3,7 +3,6 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const app = express();
-let config = require('config');
 /*
  * Use middle ware
  */
