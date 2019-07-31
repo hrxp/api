@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Channel, Users, Message } = require('../db/model/channel');
+const { insertDummyData, deleteDummyData } = require('../db/dummyData/insertDummySchemaData');
 var express = require('express');
 
 //During the test the env variable is set to test
@@ -12,10 +13,13 @@ const server = require('../server/index');
 const should = chai.should();
 chai.use(chaiHttp);
 
+deleteDummyData();
+
 describe('Channels', () => {
-  /*
-   * Test the /GET route for channels
-   */
+  before(async () => {
+    await insertDummyData();
+    return;
+  });
   describe('/channels: List of channels', () => {
     it('it should GET all the channels', done => {
       chai
@@ -32,19 +36,21 @@ describe('Channels', () => {
 });
 
 describe('A channels Messages', () => {
-  /*
-   * Test the /GET route for a specific channel message
-   */
+  after(async () => {
+    // runs after all tests in this block
+    await deleteDummyData();
+    process.exit();
+  });
   describe('/channels/:channelId/messags', () => {
-    it('it should GET all the channels', done => {
+    it('it should GET all the messages for a channel', done => {
       chai
         .request(server)
         .get('/channels/exampleChannel/messages')
-        .end((err, res) => {
+        .end(async (err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
+          // await deleteDummyData();
           done();
-          process.exit();
         });
     });
   });
