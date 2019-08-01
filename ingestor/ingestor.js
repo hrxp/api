@@ -16,7 +16,7 @@ state.messages = [];
 const filewalker = async (dir, done) => {
   // read the directory (unzipped archive), this is also the recursive function.
   await fs.readdir(dir, async function(err, list) {
-    // If at any point there is an error, invoke the callback function witht the error as the argument
+    // If at any point there is an error, invoke the callback function with the error as the argument
     if (err) return done(err);
 
     // Check to see if there are any items in the list
@@ -31,9 +31,8 @@ const filewalker = async (dir, done) => {
 
       //
       fs.stat(file, async (err, stat) => {
-        // If there are stats and there is a directory for this file(folder), we will push
+        // If there are stats and there is a directory for this file(folder), we will push the file/folder into the results array
         if (stat && stat.isDirectory()) {
-          // Add directory to array
           state.results.push(file);
 
           // If we reach here, we know this file is a directory, and we recuseively call filewalker with the directory
