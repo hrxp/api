@@ -50,9 +50,8 @@ class File {
 
 const processFileController = async (fileName, func, funcArgs) => {
   let state = {};
-  // Create a new ReadFile Class
   state.readFile = new File(fileName);
-  // Read the file and then process the file, passing in fun & it's function and its arguments.
+
   try {
     // Read the file and store in the File object
     const results = await state.readFile.readFile();
