@@ -28,6 +28,7 @@
   "devDependencies": {
     "morgan": "^1.9.1",
     "swagger-editor-live": "^2.1.8",
-    "swagger-ui-express": "^4.0.7"
+    "swagger-ui-express": "^4.0.7",
+    "unzipper": "^0.10.1"
   }
 }
