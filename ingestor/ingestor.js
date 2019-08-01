@@ -7,6 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const { processFileController } = require('./utils.js');
 
+// Local State
 let state = {};
 state.results = [];
 state.users = [];
@@ -14,7 +15,7 @@ state.channels = [];
 state.messages = [];
 
 const filewalker = async (dir, done) => {
-  // read the directory (unzipped archive), this is also the recursive function.
+  // Read the directory (unzipped archive), this is also the recursive function.
   await fs.readdir(dir, async function(err, list) {
     // If at any point there is an error, invoke the callback function with the error as the argument
     if (err) return done(err);
