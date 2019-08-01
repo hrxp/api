@@ -28,9 +28,13 @@ const filewalker = async (dir, done) => {
 
     // For each item in the file list, iterate over the file.
     list.forEach(file => {
+      // Save the relative path of a file in this variable
+      let relativeFilePath = file;
+
+      // Grab the absolute path of a file
       file = path.resolve(dir, file);
 
-      //
+      // Grab information about a file
       fs.stat(file, async (err, stat) => {
         // If there are stats and there is a directory for this file(folder), we will push the file/folder into the results array
         if (stat && stat.isDirectory()) {
@@ -46,18 +50,14 @@ const filewalker = async (dir, done) => {
           //  ** Here is where we would read each file and parse the data, there are 4 different cases
           //  */
 
-          // Find the relative file path
-          let fileNameArr = file.split('/');
-          let relativeFileName = fileNameArr.slice(fileNameArr.length - 1);
-
           // There are 4 different cases for a file, find the case and insert into the correct array
-          if (relativeFileName[0] === 'users.json') {
+          if (relativeFilePath === 'users.json') {
             let user = await processFileController(file);
             state.users.push(user);
-          } else if (relativeFileName[0] === 'channels.json') {
+          } else if (relativeFilePath === 'channels.json') {
             let channelResults = await processFileController(file);
             state.channels.push(channelResults);
-          } else if ((relativeFileName[0] = 'integration_logs')) {
+          } else if ((relativeFilePath = 'integration_logs')) {
             // We are not keeping track of this data?
           } else {
             const results = await processFileController(file);
