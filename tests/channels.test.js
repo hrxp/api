@@ -15,7 +15,7 @@ chai.use(chaiHttp);
 
 deleteDummyData();
 
-describe('Channels', () => {
+describe('All Channels', () => {
   before(async () => {
     await insertDummyData();
     return;
@@ -28,8 +28,8 @@ describe('Channels', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
+          res.body[res.body.length - 1].id.should.equal('testChannel');
           done();
-          server.close();
         });
     });
   });
@@ -41,14 +41,16 @@ describe('A channels Messages', () => {
     await deleteDummyData();
     process.exit();
   });
-  describe('/channels/:channelId/messags', () => {
+  describe('/channels/:channelId/messages', () => {
     it('it should GET all the messages for a channel', done => {
       chai
         .request(server)
-        .get('/channels/exampleChannel/messages')
+        .get('/channels/testChannel/messages')
         .end(async (err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
+          // console.log(res.body);
+          // res.body[res.body.length - 1].id.should.equal('testMessage');
           // await deleteDummyData();
           done();
         });
