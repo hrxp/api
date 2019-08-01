@@ -28,7 +28,7 @@ const insertDummyData = async () => {
         id: 'testMessage',
         ts: '10:00am',
         text: 'example message',
-        channelId: 'a123456',
+        channelId: 'testChannel',
         files: [
           {
             id: 'aaaa',
