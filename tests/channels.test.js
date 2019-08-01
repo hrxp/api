@@ -13,47 +13,47 @@ const server = require('../server/index');
 const should = chai.should();
 chai.use(chaiHttp);
 
-deleteDummyData();
-
-describe('All Channels', () => {
-  before(async () => {
-    await insertDummyData();
-    return;
-  });
-  describe('/channels: List of channels', () => {
-    it('it should GET all the channels', done => {
-      chai
-        .request(server)
-        .get('/channels')
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('array');
-          res.body[res.body.length - 1].id.should.equal('testChannel');
-          done();
-        });
+describe('', () => {
+  after(done => {
+    // runs after all tests in this block
+    deleteDummyData().then(() => {
+      done();
     });
   });
-});
 
-describe('A channels Messages', () => {
-  after(async () => {
-    // runs after all tests in this block
-    await deleteDummyData();
-    process.exit();
+  before(done => {
+    insertDummyData().then(() => done());
   });
-  describe('/channels/:channelId/messages', () => {
-    it('it should GET all the messages for a channel', done => {
-      chai
-        .request(server)
-        .get('/channels/testChannel/messages')
-        .end(async (err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('array');
-          // console.log(res.body);
-          // res.body[res.body.length - 1].id.should.equal('testMessage');
-          // await deleteDummyData();
-          done();
-        });
+
+  describe('All Channels', () => {
+    describe('/channels: List of channels', () => {
+      it('it should GET all the channels', done => {
+        chai
+          .request(server)
+          .get('/channels')
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[res.body.length - 1].id.should.equal('testChannel');
+            done();
+          });
+      });
+    });
+  });
+
+  describe('A channels Messages', () => {
+    describe('/channels/:channelId/messages', () => {
+      it('it should GET all the messages for a channel', done => {
+        chai
+          .request(server)
+          .get('/channels/testChannel/messages')
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            // res.body[res.body.length - 1].id.should.equal('testMessage');
+            done();
+          });
+      });
     });
   });
 });
