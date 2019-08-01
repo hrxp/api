@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { processFileController } = require('./utils.js');
 
 let state = {};
 state.results = [];
@@ -41,6 +42,23 @@ const filewalker = async (dir, done) => {
           // /*
           //  ** Here is where we would read each file and parse the data, there are 4 different cases
           //  */
+
+          //we need to get the relative file path
+          let fileNameArr = file.split('/');
+          let relativeFileName = fileNameArr.slice(fileNameArr.length - 1);
+          if (relativeFileName[0] === 'users.json') {
+            let user = await processFileController(file);
+            state.users.push(user);
+          } else if (relativeFileName[0] === 'channels.json') {
+            let channelResults = await processFileController(file);
+            state.channels.push(channelResults);
+          } else if ((relativeFileName[0] = 'integration_logs')) {
+            // We are not keeping track of this data?
+          } else {
+            const results = await processFileController(file);
+            state.messages.push(results);
+          }
+          // results.push(file) not sure if we need to add the file to the list here?
 
           // if there are more items in the list, invoke the callback
           if (!--pending) {
