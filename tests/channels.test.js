@@ -3,7 +3,7 @@ const { Channel, Users, Message } = require('../db/model/channel');
 const { insertDummyData, deleteDummyData } = require('../db/dummyData/insertDummySchemaData');
 var express = require('express');
 
-//During the test the env variable is set to test
+// During the test, the env variable is set to test
 process.env.NODE_ENV = 'test';
 
 //Require the dev-dependencies
@@ -15,13 +15,14 @@ chai.use(chaiHttp);
 
 describe('', () => {
   after(done => {
-    // runs after all tests in this block
+    // Runs after all tests in this block
     deleteDummyData().then(() => {
       done();
     });
   });
 
   before(done => {
+    // Runs before any tests start in this blcok
     insertDummyData().then(() => done());
   });
 
@@ -43,14 +44,14 @@ describe('', () => {
 
   describe('A channels Messages', () => {
     describe('/channels/:channelId/messages', () => {
-      it('it should GET all the messages for a channel', done => {
+      it('it should GET all the messages for a specific channel', done => {
         chai
           .request(server)
           .get('/channels/testChannel/messages')
           .end((err, res) => {
             res.should.have.status(200);
             res.body.should.be.a('array');
-            // res.body[res.body.length - 1].id.should.equal('testMessage');
+            res.body[res.body.length - 1].id.should.equal('testMessage');
             done();
           });
       });
