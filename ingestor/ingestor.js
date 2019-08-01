@@ -1,4 +1,7 @@
+// TODOs
+// We should add the unzipper somewhere in here as well
 // Find out if we can get the relative file path instead of absolute
+// Next step after we've recursed over the archive would be to insert all the parsed data into the data base, aligning data with our mongoDB data model
 
 const fs = require('fs');
 const path = require('path');
@@ -43,9 +46,11 @@ const filewalker = async (dir, done) => {
           //  ** Here is where we would read each file and parse the data, there are 4 different cases
           //  */
 
-          //we need to get the relative file path
+          // Find the relative file path
           let fileNameArr = file.split('/');
           let relativeFileName = fileNameArr.slice(fileNameArr.length - 1);
+
+          // There are 4 different cases for a file, find the case and insert into the correct array
           if (relativeFileName[0] === 'users.json') {
             let user = await processFileController(file);
             state.users.push(user);
@@ -60,7 +65,7 @@ const filewalker = async (dir, done) => {
           }
           // results.push(file) not sure if we need to add the file to the list here?
 
-          // if there are more items in the list, invoke the callback
+          // If there are more items in the list, invoke the callback
           if (!--pending) {
             done(null);
           }
@@ -71,7 +76,6 @@ const filewalker = async (dir, done) => {
 };
 
 // Invoke the file walker function
-
 filewalker(path.resolve('./ingestor'), err => {
   if (err) {
     throw err;
