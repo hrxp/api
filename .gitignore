@@ -70,3 +70,6 @@ node_modules
 
 #sample routes 
 /db/model/exampleModel.js
+/Archive.zip
+/unzippedArchive
+/ingestor/unzippedArchive
