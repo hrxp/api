@@ -24,6 +24,7 @@ class File {
     this.fileContents;
   }
 
+  // Read a file and save into the constructor
   readFile() {
     return new Promise((resolve, reject) => {
       try {
@@ -42,19 +43,20 @@ class File {
     });
   }
 
+  // This method is here in the case we wanted to do invoke a function on the this.fileContents
   async processFile(processFileFunction, ...otherArgs) {
     const results = processFileFunction(...otherArgs);
     return results;
   }
 }
 
-const processFileController = async (fileName, func, funcArgs) => {
+// Used to control the flow of reading a file.
+const processFileController = async fileName => {
   let state = {};
-  state.readFile = new File(fileName);
-
+  state.file = new File(fileName);
   try {
     // Read the file and store in the File object
-    const results = await state.readFile.readFile();
+    const results = await state.file.readFile();
     return results;
   } catch (err) {
     console.log(err);
