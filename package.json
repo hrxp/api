@@ -4,7 +4,7 @@
   "description": "This is the api for the hrxp slack archive",
   "main": "server/index.js",
   "scripts": {
-    "test": "mocha ./tests --recursive --timeout 10000",
+    "test": "mocha ./server/controller/tests/channels.test.js --timeout 10000",
     "start": "nodemon server/index.js"
   },
   "repository": {
