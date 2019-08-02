@@ -62,10 +62,10 @@ module.exports = {
   fetchMessages: async channelId => {
     try {
       // TODO: fetch all the messages for a specific channel
-
       const messages = await Message.find({ channelId: channelId });
       return messages;
     } catch (err) {
+      console.log('Error posting a message: ', err);
       return err;
     }
   },
