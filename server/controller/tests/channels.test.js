@@ -35,7 +35,7 @@ describe('channel', () => {
         downloadUrl: 'http://download.com/pdf',
       },
     ],
-    replies: [{ id: 'a1234a', createdBy: 'user1', ts: '10:01am', text: 'example reply' }],
+    replies: [],
   };
 
   const dummyUser = {
@@ -55,7 +55,7 @@ describe('channel', () => {
       await newUser.save();
       await newMessage.save();
     } catch (err) {
-      err;
+      console.log('Error before each: ', err);
     }
   });
 
@@ -64,10 +64,11 @@ describe('channel', () => {
     const dummyMessageId = 'testMessage';
     const dummyUserId = 'testUser';
     try {
-    } catch (err) {
-      await Channel.deleteOne({ id: dummyChannelId }).catch(err => console.log(err));
+      await Channel.deleteOne({ id: dummyChannelId });
       await User.deleteOne({ id: dummyUserId });
       await Message.deleteOne({ id: dummyMessageId });
+    } catch (err) {
+      console.log('error after each: ', err);
     }
   });
 
@@ -80,7 +81,6 @@ describe('channel', () => {
           res.should.have.status(200);
           res.body.should.be.a('array');
           res.body[res.body.length - 1].id.should.equal('testChannel');
-          server.close();
           done();
         });
     });
@@ -94,8 +94,6 @@ describe('channel', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
-          // res.body[res.body.length - 1].id.should.equal('testMessage');
-
           done();
         });
     });
