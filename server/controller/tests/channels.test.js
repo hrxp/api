@@ -45,6 +45,7 @@ describe('channel', () => {
   };
 
   beforeEach(async () => {
+    // TODO: Create a new db connection before every test
     try {
       let newChannel = new Channel(dummyChannel);
       let newUser = new User(dummyUser);
@@ -58,6 +59,7 @@ describe('channel', () => {
   });
 
   afterEach(async () => {
+    // TODO: End the db connection before every test
     const dummyChannelId = 'testChannel';
     const dummyMessageId = 'testMessage';
     const dummyUserId = 'testUser';
