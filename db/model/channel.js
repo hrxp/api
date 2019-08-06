@@ -1,11 +1,6 @@
-// Todo
+// TODOS
 // Figure out how to reference anoter schema in Mongoose
 // Explore populate to use with the reference https://mongoosejs.com/docs/populate.html
-// Finalize schema's
-// What type should we use for the timestamp
-// What is the timestamp schema all about?
-// Add dummy data to the database
-
 const mongoose = require('mongoose');
 
 const channelSchema = new mongoose.Schema({
@@ -31,7 +26,6 @@ const messageSchema = new mongoose.Schema({
       files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
     },
   ],
-  ts: String,
 });
 
 const userSchema = new mongoose.Schema({
@@ -53,8 +47,7 @@ const Message = mongoose.model('Message', messageSchema);
 module.exports = {
   fetchChannels: async channelId => {
     try {
-      // TODO: fetch all the channels from the database
-      const channels = Channel.find();
+      const channels = await Channel.find();
       return channels;
     } catch (err) {
       return err;
@@ -62,10 +55,14 @@ module.exports = {
   },
   fetchMessages: async channelId => {
     try {
-      const messages = Message.find({ channelId: channelId });
+      const messages = await Message.find({ channelId: channelId });
       return messages;
     } catch (err) {
+      console.log('Error posting a message: ', err);
       return err;
     }
   },
+  Channel,
+  User,
+  Message,
 };
