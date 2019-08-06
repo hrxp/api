@@ -23,11 +23,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:channelId', async (req, res) => {
+router.get('/:channelId/messages', async (req, res) => {
   const { channelId } = req.params;
-
   try {
-    const results = await fetchChannel(channelId);
+    const results = await fetchMessages(channelId);
     res.status(200).send(results);
   } catch (err) {
     res.status(404).send(err);

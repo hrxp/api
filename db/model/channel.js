@@ -1,15 +1,10 @@
-// Todo
+// TODOS
 // Figure out how to reference anoter schema in Mongoose
 // Explore populate to use with the reference https://mongoosejs.com/docs/populate.html
-// Finalize schema's
-// What type should we use for the timestamp
-// What is the timestamp schema all about?
-// Add dummy data to the database
-// Find By messageId.
 const mongoose = require('mongoose');
 
 const channelSchema = new mongoose.Schema({
-  id: String,
+  id: { type: String, unique: true },
   topic: String,
   purpose: { type: String, unique: true, required: true },
   members: [String],
@@ -17,23 +12,24 @@ const channelSchema = new mongoose.Schema({
 });
 
 const messageSchema = new mongoose.Schema({
-  id: String,
+  id: { type: String, unique: true },
   ts: String,
   text: String,
   channelId: String,
   files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
   replies: [
     {
-      id: String,
+      id: { type: String, unique: true },
       createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       ts: String,
       text: String,
+      files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
     },
   ],
 });
 
 const userSchema = new mongoose.Schema({
-  id: String,
+  id: { type: String, unique: true },
   profilePhoto: String,
   displayName: String,
   realName: String,
@@ -49,11 +45,9 @@ const User = mongoose.model('User', userSchema);
 const Message = mongoose.model('Message', messageSchema);
 
 module.exports = {
-  fetchChannels: async () => {
+  fetchChannels: async channelId => {
     try {
-      // TODO: fetch all the channels from the database
       const channels = await Channel.find();
-
       return channels;
     } catch (err) {
       return err;
@@ -61,7 +55,6 @@ module.exports = {
   },
   fetchMessages: async channelId => {
     try {
-      // TODO: fetch all the messages for a specific channel
       const messages = await Message.find({ channelId: channelId });
       return messages;
     } catch (err) {

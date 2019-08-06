@@ -1,7 +1,12 @@
 const db = require('../db/index');
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const YAML = require("js-yaml")
+const swaggerUi = require('swagger-ui-express');
+
 const app = express();
 /*
  * Use middle ware
@@ -23,7 +28,18 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.send('example endpoint');
 });
+// OpenAPI documentation
+app.use('/docs', swaggerUi.serve);
+app.get('/docs', swaggerUi.setup(
+  YAML.safeLoad(
+    fs.readFileSync(
+      path.join(__dirname, './openapi.yaml'), 
+      "utf8"
+    )
+  )
+));
 
+// Routes
 app.use('/channels', channel);
 
 const server = app.listen(3000, () => {
