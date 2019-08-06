@@ -4,10 +4,10 @@ const { Channel, User, Message } = require('../model/channel.js');
 
 const insertDummyData = () => {
   return new Promise((resolve, reject) => {
-    // make a connection
+    // Make a connection
     mongoose.connect(mongoURL, { useNewUrlParser: true });
 
-    // get reference to database
+    // Get reference to database
     var db = mongoose.connection;
 
     db.on('error', console.error.bind(console, 'connection error:'));
@@ -68,17 +68,17 @@ const insertDummyData = () => {
 
 const deleteDummyData = () => {
   return new Promise((resolve, reject) => {
-    // make a connection
+    // Make a connection
     mongoose.connect(mongoURL, { useNewUrlParser: true });
 
-    // get reference to database
+    // Get reference to database
     var db = mongoose.connection;
 
     db.on('error', console.error.bind(console, 'connection error:'));
 
     db.once('open', async () => {
       try {
-        // dummy id's
+        // Dummy id's
         const dummyChannelId = 'testChannel';
         const dummyMessageId = 'testMessage';
         const dummyUserId = 'testUser';
@@ -90,7 +90,6 @@ const deleteDummyData = () => {
         console.log('Successfully deleted dummy data');
         mongoose.connection.close();
         resolve();
-        return;
       } catch (err) {
         console.log('Error deleting dummy data: ', err);
         reject();
