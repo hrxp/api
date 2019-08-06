@@ -35,7 +35,6 @@ describe('channel', () => {
         downloadUrl: 'http://download.com/pdf',
       },
     ],
-    replies: [],
   };
 
   const dummyUser = {
@@ -45,12 +44,11 @@ describe('channel', () => {
     realName: 'John Doe',
   };
 
-  let newChannel = new Channel(dummyChannel);
-  let newUser = new User(dummyUser);
-  let newMessage = new Message(dummyMessage);
-
   beforeEach(async () => {
     try {
+      let newChannel = new Channel(dummyChannel);
+      let newUser = new User(dummyUser);
+      let newMessage = new Message(dummyMessage);
       await newChannel.save();
       await newUser.save();
       await newMessage.save();
@@ -79,7 +77,6 @@ describe('channel', () => {
         .get('/channels')
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.be.a('array');
           res.body[res.body.length - 1].id.should.equal('testChannel');
           done();
         });
@@ -87,13 +84,15 @@ describe('channel', () => {
   });
 
   describe('A channel messages', () => {
+    const dummyChannelId = 'testChannel';
     it('it should GET all the messages for a channel', done => {
       chai
         .request(server)
-        .get('/channels/testChannel/messages')
+        .get(`/channels/${dummyChannelId}/messages`)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
+          res.body[0].id.should.equal('testMessage1');
           done();
         });
     });
