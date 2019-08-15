@@ -1,6 +1,7 @@
 // TODOS
 // Figure out how to reference anoter schema in Mongoose
 // Explore populate to use with the reference https://mongoosejs.com/docs/populate.html
+// Update the openAPI document
 const mongoose = require('mongoose');
 
 const channelSchema = new mongoose.Schema({
