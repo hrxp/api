@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const channelSchema = new mongoose.Schema({
   id: { type: String, unique: true },
+  name: String,
   topic: String,
   purpose: { type: String, unique: true, required: true },
   members: [String],
@@ -12,16 +13,18 @@ const channelSchema = new mongoose.Schema({
 });
 
 const messageSchema = new mongoose.Schema({
-  id: { type: String, unique: true },
+  user: String,
   ts: String,
+  type: String,
   text: String,
-  channelId: String,
+  channelName: String,
   files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
   replies: [
     {
-      id: { type: String, unique: true },
-      createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      user: String,
       ts: String,
+      type: String,
+      ChannelName: String,
       text: String,
       files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
     },
@@ -53,9 +56,11 @@ module.exports = {
       return err;
     }
   },
-  fetchMessages: async channelId => {
+  fetchMessages: async channelName => {
     try {
-      const messages = await Message.find({ channelId: channelId });
+      console.log(channelName);
+      const messages = await Message.find({ channelName: channelName });
+      console.log(messages);
       return messages;
     } catch (err) {
       console.log('Error posting a message: ', err);
