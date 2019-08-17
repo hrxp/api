@@ -4,11 +4,10 @@ API and backend for the HRX Project.
 
 ## Getting Started
 
-
 - Run `npm i` from the command line
 - Navigate to `db/config.example.js` and rename to `db/config.js`
 - Insert the MongoURL into the appropiate spot
-- Run `npm start`
+- Run `npm run dev`
 
 ## API documentation
 
