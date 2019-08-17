@@ -14,4 +14,4 @@ API and backend for the HRX Project.
 
 The API is documented in [`server/openapi.yaml`](https://github.com/hrxp/api/blob/master/server/openapi.yaml). 
 
-You can use Swagger UI to view the documentation by navigating to `/docs` while the API is running, and edit the OpenAPI documentation by executing `npm run openapi:edit`.
+You can use Swagger UI to view the documentation by navigating to `/docs` while the API is running, and you can edit the OpenAPI documentation by executing `npm run openapi:edit`.
