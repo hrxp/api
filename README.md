@@ -8,6 +8,13 @@ API and backend for the HRX Project.
 - Run `cp .env.example .env`, then open `.env` and edit the values if needed
 - Run `npm run dev`
 
+## Environment variables
+
+| Name        | Description                   | Required? | Default     |
+|-------------|-------------------------------|-----------|-------------|
+| `MONGO_URL` | The MongoDB URL to use        | **Yes**   | _undefined_ |
+| `PORT`      | The port to expose the API on | No        | `3000`      |
+
 ## API documentation
 
 The API is documented in [`server/openapi.yaml`](https://github.com/hrxp/api/blob/master/server/openapi.yaml). 
