@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha ./server/controller/tests/channels.test.js --timeout 10000 --watch",
     "openapi:edit": "swagger-editor-live server/openapi.yaml",
-    "start": "nodemon server/index.js"
+    "dev": "nodemon server/index.js",
+    "start": "NODE_ENV=production node server/index.js"
   },
   "repository": {
     "type": "git",
