@@ -4,8 +4,9 @@
   "description": "This is the api for the hrxp slack archive",
   "main": "server/index.js",
   "scripts": {
+    "dev": "nodemon server/index.js",
     "openapi:edit": "swagger-editor-live server/openapi.yaml",
-    "start": "nodemon server/index.js",
+    "start": "NODE_ENV=production node server/index.js",
     "test": "run-s test:*",
     "test:api": "mocha ./server/controller/tests/channels.test.js --timeout 10000",
     "test:formatting": "prettier -c db/**/* server/**/*"
@@ -22,19 +23,20 @@
   "homepage": "https://github.com/hrxp/api#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "js-yaml": "^3.13.1",
     "mongodb": "^3.3.0-beta2",
-    "mongoose": "^5.6.7"
+    "mongoose": "^5.6.7",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
+    "swagger-ui-express": "^4.0.7"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "faker": "^4.1.0",
     "mocha": "^6.2.0",
-    "morgan": "^1.9.1",
-    "npm-run-all": "^4.1.5",
-    "swagger-editor-live": "^2.1.8",
-    "swagger-ui-express": "^4.0.7"
+    "swagger-editor-live": "^2.1.8"
   }
 }
