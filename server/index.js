@@ -42,9 +42,11 @@ app.get('/docs', swaggerUi.setup(
 // Routes
 app.use('/channels', channel);
 
-const server = app.listen(3000, () => {
+const PORT = process.env.PORT || 3000;
+
+const server = app.listen(PORT, () => {
   if (process.env.NODE_ENV !== 'test') {
-    console.log('Hido ho, Captn! Listening on port 3000.');
+    console.log(`Hido ho, Captn! Listening on port ${PORT}.`);
   }
 });
 
