@@ -21,20 +21,20 @@
   "homepage": "https://github.com/hrxp/api#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "js-yaml": "^3.13.1",
     "mongodb": "^3.3.0-beta2",
-    "mongoose": "^5.6.7"
+    "mongoose": "^5.6.7",
+    "nodemon": "^1.19.1",
+    "swagger-ui-express": "^4.0.7"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "dotenv": "^8.0.0",
     "faker": "^4.1.0",
     "mocha": "^6.2.0",
     "morgan": "^1.9.1",
-    "nodemon": "^1.19.1",
-    "swagger-editor-live": "^2.1.8",
-    "swagger-ui-express": "^4.0.7"
+    "swagger-editor-live": "^2.1.8"
   }
 }
