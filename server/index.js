@@ -1,3 +1,6 @@
+// load `.env` config values into `process.env`
+require('dotenv').config();
+
 const db = require('../db/index');
 const fs = require('fs');
 const path = require('path');
