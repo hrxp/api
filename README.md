@@ -4,11 +4,16 @@ API and backend for the HRX Project.
 
 ## Getting Started
 
+- Run `npm i`
+- Run `cp .env.example .env`, then open `.env` and edit the values if needed
+- Run `npm run dev`
 
-- Run `npm i` from the command line
-- Navigate to `db/config.example.js` and rename to `db/config.js`
-- Insert the MongoURL into the appropiate spot
-- Run `npm start`
+## Environment variables
+
+| Name        | Description                   | Required? | Default     |
+|-------------|-------------------------------|-----------|-------------|
+| `MONGO_URL` | The MongoDB URL to use        | **Yes**   | _undefined_ |
+| `PORT`      | The port to expose the API on | No        | `3000`      |
 
 ## API documentation
 
