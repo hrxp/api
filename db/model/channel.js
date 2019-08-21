@@ -5,15 +5,16 @@
 const mongoose = require('mongoose');
 
 const channelSchema = new mongoose.Schema({
-  id: { type: String, unique: true },
+  slackId: { type: String, unique: true },
   name: String,
   topic: String,
   purpose: { type: String, unique: true, required: true },
   members: [String],
-  isArchived: String,
+  isArchived: Boolean,
 });
 
 const messageSchema = new mongoose.Schema({
+  slackId: String,
   user: String,
   ts: String,
   type: String,
@@ -25,7 +26,7 @@ const messageSchema = new mongoose.Schema({
       user: String,
       ts: String,
       type: String,
-      ChannelName: String,
+      channelName: String,
       text: String,
       files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
     },
@@ -33,7 +34,7 @@ const messageSchema = new mongoose.Schema({
 });
 
 const userSchema = new mongoose.Schema({
-  id: { type: String, unique: true },
+  slackId: { type: String, unique: true },
   profilePhoto: String,
   displayName: String,
   realName: String,
