@@ -6,6 +6,16 @@ const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'DevSecret';
 
+/*
+ * Get the JWT_SECRET from `process.env`.
+ *
+ * If we're in development, we'll tolerate the env var not being set
+ * and simply use "DevSecret" instead, but in production we will
+ * kill the entire server since auth can't work securely unless
+ * we have a good JWT_SECRET set.
+ *
+ * More about JWTs: https://jwt.io/introduction/
+ */
 if (!process.env.JWT_SECRET) {
   console.warn(`WARNING: "process.env.JWT_SECRET" is not set.`);
   if (process.env.NODE_ENV === 'production') {

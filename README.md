@@ -10,10 +10,11 @@ API and backend for the HRX Project.
 
 ## Environment variables
 
-| Name        | Description                   | Required? | Default     |
-|-------------|-------------------------------|-----------|-------------|
-| `MONGO_URL` | The MongoDB URL to use        | **Yes**   | _undefined_ |
-| `PORT`      | The port to expose the API on | No        | `3000`      |
+| Name         | Description                   | Required?              | Default     |
+| ------------ | ----------------------------- | ---------------------- | ----------- |
+| `MONGO_URL`  | The MongoDB URL to use        | **Yes**                | _undefined_ |
+| `JWT_SECRET` | The secret used to sign JWTs  | **Yes**, in production | `3000`      |
+| `PORT`       | The port to expose the API on | No                     | `3000`      |
 
 ## API documentation
 
