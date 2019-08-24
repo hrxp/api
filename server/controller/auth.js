@@ -30,8 +30,8 @@ router.get('/access_token', async (req, res) => {
     'https://slack.com/api/oauth.access',
     querystring.stringify({
       code: code,
-      client_id: '671720357619.724476729541',
-      client_secret: '2411807b3b25fbe2b78343b38ff430cd', // TODO: make this an env var
+      client_id: process.env.SLACK_LOGIN_CLIENT_ID,
+      client_secret: process.env.SLACK_LOGIN_CLIENT_SECRET,
     })
   );
 
