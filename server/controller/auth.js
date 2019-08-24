@@ -26,8 +26,8 @@ if (!process.env.JWT_SECRET) {
 /*
  * Routes
  */
-router.get('/access_token', async (req, res) => {
-  const { code } = req.query;
+router.post('/access_token', async (req, res) => {
+  const { code } = req.body;
 
   // Via the Slack API, exchange the Slack Authorization Code coming from the
   // frontend for a Slack Access Token

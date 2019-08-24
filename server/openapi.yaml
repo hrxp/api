@@ -37,13 +37,17 @@ paths:
                 items:
                   $ref: "#/components/schemas/Message"
 /auth/access_token:
-  get:
+    post:
     tags: [Auth]
     summary: exchange a Slack OAuth authorization code for a JWT
-    parameters:
-      - name: code
-        in: query
+      requestBody:
+        description: Payload that includes the OAuth Authorization Code from Slack
+        content:
+          application/json:
         schema:
+              type: object
+              properties:
+                code:
           type: string
     responses:
       200:
