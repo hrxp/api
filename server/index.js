@@ -16,6 +16,8 @@ const app = express();
  */
 // Channel router
 const channel = require('./controller/channel.js');
+// Auth router
+const auth = require('./controller/auth.js');
 // Parses incoming requests with JSON payloads
 app.use(express.json());
 // 	HTTP request logger if we are not in the test environment
@@ -43,7 +45,7 @@ app.get('/docs', swaggerUi.setup(
 ));
 
 // Routes
-app.use('/channels', channel);
+app.use('/auth', auth);
 
 const PORT = process.env.PORT || 3000;
 

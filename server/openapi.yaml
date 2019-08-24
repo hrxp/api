@@ -1,11 +1,11 @@
-openapi: "3.0.0"
+openapi: '3.0.0'
 
 info:
   version: 0.0.3
   title: HRXP Archive API
 
 tags:
-- name: Channels
+  - name: Channels
 
 paths:
   /channels:
@@ -23,7 +23,7 @@ paths:
                   $ref: '#/components/schemas/Channel'
   /channels/{channelId}/messages:
     parameters:
-    - $ref: "#/components/parameters/channelId"
+      - $ref: '#/components/parameters/channelId'
     get:
       tags: [Channels]
       summary: Return a specific channel's messages
@@ -36,12 +36,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Message'
+  /auth/access_token:
+    get:
+      tags: [Auth]
+      summary: exchange a Slack OAuth authorization code for a JWT
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: success! JWT in response
 components:
   schemas:
     Channel:
       type: object
       properties:
-        id: 
+        id:
           type: string
           example: C035Z8YT7
         topic:
@@ -53,18 +65,18 @@ components:
         members:
           type: array
           items:
-            $ref: "#/components/schemas/User/properties/id"
+            $ref: '#/components/schemas/User/properties/id'
         isArchived:
           type: boolean
           default: false
     Message:
       type: object
       properties:
-        id: 
+        id:
           type: string
           example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
         ts:
-          $ref: "#/components/schemas/__Timestamp"
+          $ref: '#/components/schemas/__Timestamp'
         text:
           type: string
           example: Happy Monday, everyone!
@@ -73,7 +85,7 @@ components:
           items:
             type: object
             properties:
-              id: 
+              id:
                 type: string
                 example: FJ0UW704E
               displayName:
@@ -85,34 +97,34 @@ components:
               downloadUrl:
                 type: string
                 format: url
-                example: "https://hrxp.com/static/files/FJ0UW704E/contractor-description.pdf"
+                example: 'https://hrxp.com/static/files/FJ0UW704E/contractor-description.pdf'
         replies:
           type: array
           items:
             properties:
-              id: 
+              id:
                 type: string
                 example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710b
-              createdBy: 
-                $ref: "#/components/schemas/User"
+              createdBy:
+                $ref: '#/components/schemas/User'
               ts:
-                $ref: "#/components/schemas/__Timestamp"
+                $ref: '#/components/schemas/__Timestamp'
               text:
                 type: string
         createdBy:
-          $ref: "#/components/schemas/User"
+          $ref: '#/components/schemas/User'
     User:
       type: object
       properties:
-        id: 
+        id:
           type: string
           example: U07AT4FB4
         profilePhoto:
           type: string
-          example: "https://hrxp.com/static/avatars/U07AT4FB4.png"
+          example: 'https://hrxp.com/static/avatars/U07AT4FB4.png'
         displayName:
           type: string
-          example: "Kyle Shockey [HR26]"
+          example: 'Kyle Shockey [HR26]'
         realName:
           type: string
           example: Kyle Shockey
@@ -121,7 +133,7 @@ components:
 
     __Timestamp:
       type: string
-      example: "1501536037.682405"
+      example: '1501536037.682405'
 
   parameters:
     channelId:
@@ -129,4 +141,4 @@ components:
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/Channel/properties/id"
+        $ref: '#/components/schemas/Channel/properties/id'
