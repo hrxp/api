@@ -23,9 +23,14 @@ if (!process.env.JWT_SECRET) {
   }
 }
 
+/*
+ * Routes
+ */
 router.get('/access_token', async (req, res) => {
   const { code } = req.query;
 
+  // Via the Slack API, exchange the Slack Authorization Code coming from the
+  // frontend for a Slack Access Token
   const accessTokenResponse = await axios.post(
     'https://slack.com/api/oauth.access',
     querystring.stringify({
@@ -36,11 +41,13 @@ router.get('/access_token', async (req, res) => {
   );
 
   if (!accessTokenResponse.data.ok) {
+    // If our Slack API request fails, send the error back
     return res.status(500).send(accessTokenResponse.data);
   }
 
   const accessToken = accessTokenResponse.data.access_token;
 
+  // Use our new Slack Access Token to get info about the user's Slack account
   const userIdentityResponse = await axios.post(
     'https://slack.com/api/users.identity',
     querystring.stringify({
@@ -48,14 +55,21 @@ router.get('/access_token', async (req, res) => {
     })
   );
 
+  // Create a new JWT with a payload that includes the user's Slack info
   const jwt = JWT.sign(
     {
-      id: userIdentityResponse.data.user.id,
+      // JWT registered claims
+      sub: userIdentityResponse.data.user.id,
+      iss: 'hrxp_api',
+      // our private claims
       email: userIdentityResponse.data.user.email,
       name: userIdentityResponse.data.user.name,
       image_72: userIdentityResponse.data.user.image_72,
     },
-    JWT_SECRET
+    JWT_SECRET,
+    {
+      expiresIn: '60d', // token will expire in 60 days
+    }
   );
 
   res.send(jwt);
