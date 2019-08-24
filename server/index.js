@@ -7,7 +7,8 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const YAML = require("js-yaml")
+const YAML = require('js-yaml');
+const expressJwt = require('express-jwt');
 const swaggerUi = require('swagger-ui-express');
 
 const app = express();
@@ -45,6 +46,7 @@ app.get('/docs', swaggerUi.setup(
 ));
 
 // Routes
+app.use('/channels', expressJwt({ secret: process.env.JWT_SECRET || 'DevSecret' }), channel);
 app.use('/auth', auth);
 
 const PORT = process.env.PORT || 3000;
