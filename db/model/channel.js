@@ -10,7 +10,7 @@ const channelSchema = new mongoose.Schema({
   name: String,
   topic: String,
   purpose: String,
-  members: [String],
+  members: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   isArchived: Boolean,
 });
 
