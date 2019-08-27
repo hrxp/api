@@ -68,6 +68,19 @@ module.exports = {
       return err;
     }
   },
+  searchMessages: async (word, firstQ) => {
+    try {
+      const found = await Message.find({ text: word }, "text replies").limit(10).sort('-createdOn');
+      return found;
+    } catch (err) {
+      console.log("Error searching messages: ", err);
+      return err;
+    }
+  },
+  // add helper function
+  // limit: how many I get (25), offset: 25
+  // lazy loading - what kind of backend
+  // 
   Channel,
   User,
   Message,
