@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 const faker = require('faker');
 const { mongoURL } = require('../config');
-const { Channel, User, Message } = require('../model/channel.js');
+const { Channel, User, Message } = require('../models/channel.js.js');
 
 const dummyChannels = () => {
   const channels = [];
