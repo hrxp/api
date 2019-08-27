@@ -41,8 +41,9 @@ components:
     Channel:
       type: object
       properties:
-        _id: string
-        example: edveevere2323dc3
+        _id: 
+          type: string
+          example: edveevere2323dc3
         slackId: 
           type: string
           example: C035Z8YT7
@@ -58,7 +59,7 @@ components:
         members:
           type: array
           items:
-            $ref: "#/components/schemas/User/properties/id"
+            $ref: "#/components/schemas/User/properties/_id"
         isArchived:
           type: boolean
           default: false
@@ -148,7 +149,6 @@ components:
                       example: "https://hrxp.com/static/files/FJ0UW704E/contractor-description.pdf"
         createdBy:
           $ref: "#/components/schemas/User"
-        
     User:
       type: object
       properties:
@@ -180,4 +180,4 @@ components:
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/Channel/properties/id"
+        $ref: "#/components/schemas/Channel/properties/_id"
