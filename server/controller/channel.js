@@ -5,13 +5,13 @@
 
 const express = require('express');
 const router = express.Router();
-const { example } = require('../../db/model/channel');
+const { example } = require('../../db/models');
 const {
   fetchChannel,
   fetchChannels,
   fetchMessage,
   fetchMessages,
-} = require('../../db/model/channel');
+} = require('../../db/models');
 
 // router.use(express.json());
 router.get('/', async (req, res) => {
