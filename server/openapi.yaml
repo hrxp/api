@@ -5,7 +5,7 @@ info:
   title: HRXP Archive API
 
 tags:
-- name: Channels
+  - name: Channels
 
 paths:
   /channels:
@@ -20,10 +20,10 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Channel'
+                  $ref: "#/components/schemas/Channel"
   /channels/{channelId}/messages:
     parameters:
-    - $ref: "#/components/parameters/channelId"
+      - $ref: "#/components/parameters/channelId"
     get:
       tags: [Channels]
       summary: Return a specific channel's messages
@@ -35,13 +35,29 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Message'
+                  $ref: "#/components/schemas/Message"
+/auth/access_token:
+    post:
+    tags: [Auth]
+    summary: exchange a Slack OAuth authorization code for a JWT
+      requestBody:
+        description: Payload that includes the OAuth Authorization Code from Slack
+        content:
+          application/json:
+        schema:
+              type: object
+              properties:
+                code:
+          type: string
+    responses:
+      200:
+        description: success! JWT in response
 components:
   schemas:
     Channel:
       type: object
       properties:
-        id: 
+        id:
           type: string
           example: C035Z8YT7
         topic:
@@ -60,7 +76,7 @@ components:
     Message:
       type: object
       properties:
-        id: 
+        id:
           type: string
           example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
         ts:
@@ -73,7 +89,7 @@ components:
           items:
             type: object
             properties:
-              id: 
+              id:
                 type: string
                 example: FJ0UW704E
               displayName:
@@ -90,10 +106,10 @@ components:
           type: array
           items:
             properties:
-              id: 
+              id:
                 type: string
                 example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710b
-              createdBy: 
+              createdBy:
                 $ref: "#/components/schemas/User"
               ts:
                 $ref: "#/components/schemas/__Timestamp"
@@ -104,7 +120,7 @@ components:
     User:
       type: object
       properties:
-        id: 
+        id:
           type: string
           example: U07AT4FB4
         profilePhoto:
