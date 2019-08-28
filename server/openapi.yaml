@@ -40,15 +40,15 @@ paths:
     post:
     tags: [Auth]
     summary: exchange a Slack OAuth authorization code for a JWT
-      requestBody:
-        description: Payload that includes the OAuth Authorization Code from Slack
-        content:
-          application/json:
-        schema:
-              type: object
-              properties:
-                code:
-          type: string
+    requestBody:
+      description: Payload that includes the OAuth Authorization Code from Slack
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
     responses:
       200:
         description: success! JWT in response
