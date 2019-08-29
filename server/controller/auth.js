@@ -70,7 +70,7 @@ router.post('/access_token', async (req, res) => {
   // In production, this should be HRX's Team ID.
   if (
     process.env.SLACK_LOGIN_TEAM_ID &&
-    userIdentityResponse.data.team.id !== SLACK_LOGIN_TEAM_ID
+    userIdentityResponse.data.team.id !== process.env.SLACK_LOGIN_TEAM_ID
   ) {
     return res.status(401).send('Error: Slack team does not match.');
   }
