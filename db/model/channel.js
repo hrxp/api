@@ -65,7 +65,15 @@ module.exports = {
   fetchMessages: async channelName => {
     try {
       const messages = await Message.find({ channelName: channelName }).populate('createdBy');
-      return messages;
+      // TODO: find a better solution to this
+      const messagesWithoutMetaEvents = messages.filter(message => {
+        return (
+          !message.text.includes('has joined the channel') &&
+          !message.text.includes('has left the channel') &&
+          !message.text.includes('set the channel topic')
+        );
+      });
+      return messagesWithoutMetaEvents;
     } catch (err) {
       console.log('Error posting a message: ', err);
       return err;
