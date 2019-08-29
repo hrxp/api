@@ -4,10 +4,12 @@
   "description": "This is the api for the hrxp slack archive",
   "main": "server/index.js",
   "scripts": {
-    "test": "mocha ./server/controller/tests/channels.test.js --timeout 10000 --watch",
-    "openapi:edit": "swagger-editor-live server/openapi.yaml",
     "dev": "nodemon server/index.js",
-    "start": "NODE_ENV=production node server/index.js"
+    "openapi:edit": "swagger-editor-live server/openapi.yaml",
+    "start": "NODE_ENV=production node server/index.js",
+    "test": "run-s test:*",
+    "test:api": "mocha ./server/controller/tests/channels.test.js --timeout 10000",
+    "test:formatting": "prettier -c db/**/* server/**/*"
   },
   "repository": {
     "type": "git",
@@ -20,10 +22,13 @@
   },
   "homepage": "https://github.com/hrxp/api#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
     "js-yaml": "^3.13.1",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.0-beta2",
     "mongoose": "^5.6.7",
     "morgan": "^1.9.1",

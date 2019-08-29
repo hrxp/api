@@ -7,7 +7,8 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const YAML = require("js-yaml")
+const YAML = require('js-yaml');
+const expressJwt = require('express-jwt');
 const swaggerUi = require('swagger-ui-express');
 
 const app = express();
@@ -16,6 +17,8 @@ const app = express();
  */
 // Channel router
 const channel = require('./controller/channel.js');
+// Auth router
+const auth = require('./controller/auth.js');
 // Parses incoming requests with JSON payloads
 app.use(express.json());
 // 	HTTP request logger if we are not in the test environment
@@ -43,7 +46,8 @@ app.get('/docs', swaggerUi.setup(
 ));
 
 // Routes
-app.use('/channels', channel);
+app.use('/channels', expressJwt({ secret: process.env.JWT_SECRET || 'DevSecret' }), channel);
+app.use('/auth', auth);
 
 const PORT = process.env.PORT || 3000;
 
