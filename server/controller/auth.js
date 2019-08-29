@@ -24,6 +24,15 @@ if (!process.env.JWT_SECRET) {
 }
 
 /*
+ * Likewise, if we're in production, refuse to start if `SLACK_LOGIN_TEAM_ID`
+ * is not set. See below for why it's important.
+ */
+if (process.env.NODE_ENV === 'production' && !process.env.SLACK_LOGIN_TEAM_ID) {
+  console.error(`ERROR: "SLACK_LOGIN_TEAM_ID" is not set, refusing to start.`);
+  process.exit(1);
+}
+
+/*
  * Routes
  */
 router.post('/access_token', async (req, res) => {
@@ -54,6 +63,14 @@ router.post('/access_token', async (req, res) => {
       token: accessToken,
     })
   );
+
+  // Ensure that the user identity response's Team ID matches the
+  // `SLACK_LOGIN_TEAM_ID` we have. Without this, anyone would be able to sign
+  // in from *any* Slack team and trick us into giving out a JWT.
+  // In production, this should be HRX's Team ID.
+  if (process.env.SLACK_LOGIN_TEAM_ID && userIdentityResponse.team.id !== SLACK_LOGIN_TEAM_ID) {
+    return res.status(401).send('Error: Slack team does not match.');
+  }
 
   // Create a new JWT with a payload that includes the user's Slack info
   const jwt = JWT.sign(
