@@ -68,7 +68,10 @@ router.post('/access_token', async (req, res) => {
   // `SLACK_LOGIN_TEAM_ID` we have. Without this, anyone would be able to sign
   // in from *any* Slack team and trick us into giving out a JWT.
   // In production, this should be HRX's Team ID.
-  if (process.env.SLACK_LOGIN_TEAM_ID && userIdentityResponse.team.id !== SLACK_LOGIN_TEAM_ID) {
+  if (
+    process.env.SLACK_LOGIN_TEAM_ID &&
+    userIdentityResponse.data.team.id !== SLACK_LOGIN_TEAM_ID
+  ) {
     return res.status(401).send('Error: Slack team does not match.');
   }
 
