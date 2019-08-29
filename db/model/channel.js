@@ -70,7 +70,8 @@ module.exports = {
         return (
           !message.text.includes('has joined the channel') &&
           !message.text.includes('has left the channel') &&
-          !message.text.includes('set the channel topic')
+          !message.text.includes('set the channel topic') &&
+          !message.text.includes(`can't be shown because your team is past the free storage limit`)
         );
       });
       return messagesWithoutMetaEvents;
