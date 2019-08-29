@@ -57,9 +57,15 @@ components:
     Channel:
       type: object
       properties:
-        id:
+        _id: 
+          type: string
+          example: edveevere2323dc3
+        slackId:
           type: string
           example: C035Z8YT7
+        name: 
+          type: string
+          example: general
         topic:
           type: string
           example: Mission 1st, People Always.
@@ -69,18 +75,27 @@ components:
         members:
           type: array
           items:
-            $ref: "#/components/schemas/User/properties/id"
+            $ref: "#/components/schemas/User/properties/_id"
         isArchived:
           type: boolean
           default: false
     Message:
       type: object
       properties:
-        id:
+        _id: 
           type: string
           example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
         ts:
           $ref: "#/components/schemas/__Timestamp"
+        type: 
+          type: string
+          example: thread
+        channelName:
+          type: string
+          example: general
+        channelId:
+          type: string
+          example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
         text:
           type: string
           example: Happy Monday, everyone!
@@ -89,9 +104,12 @@ components:
           items:
             type: object
             properties:
-              id:
+              _id: 
                 type: string
-                example: FJ0UW704E
+                example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
+              slackId: 
+                type: string
+                example: FJ0UW704
               displayName:
                 type: string
                 example: contractor-description.pdf
@@ -106,7 +124,7 @@ components:
           type: array
           items:
             properties:
-              id:
+              _id: 
                 type: string
                 example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710b
               createdBy:
@@ -115,12 +133,45 @@ components:
                 $ref: "#/components/schemas/__Timestamp"
               text:
                 type: string
+              type:
+                type: string
+                example: reply
+              channelName: 
+                type: string
+                example: general
+              channelId:
+                type: string
+                example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
+              files:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id: 
+                      type: string
+                      example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
+                    slackId: 
+                      type: string
+                      example: FJ0UW704
+                    displayName:
+                      type: string
+                      example: contractor-description.pdf
+                    fileType:
+                      type: string
+                      example: pdf
+                    downloadUrl:
+                      type: string
+                      format: url
+                      example: "https://hrxp.com/static/files/FJ0UW704E/contractor-description.pdf"
         createdBy:
           $ref: "#/components/schemas/User"
     User:
       type: object
       properties:
-        id:
+        _id: 
+          type: string
+          example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
+        slackId: 
           type: string
           example: U07AT4FB4
         profilePhoto:
@@ -145,4 +196,4 @@ components:
       in: path
       required: true
       schema:
-        $ref: "#/components/schemas/Channel/properties/id"
+        $ref: "#/components/schemas/Channel/properties/_id"
