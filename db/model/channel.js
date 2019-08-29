@@ -3,37 +3,40 @@
 // Explore populate to use with the reference https://mongoosejs.com/docs/populate.html
 // Update the openAPI document
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const channelSchema = new mongoose.Schema({
   slackId: { type: String, unique: true },
   name: String,
   topic: String,
-  purpose: { type: String, unique: true, required: true },
-  members: [String],
+  purpose: String,
+  members: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   isArchived: Boolean,
 });
 
 const messageSchema = new mongoose.Schema({
-  slackId: String,
-  user: String,
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   ts: String,
   type: String,
   text: String,
   channelName: String,
-  files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
+  channelId: String,
+  files: [{ slackId: String, displayName: String, fileType: String, downloadUrl: String }],
   replies: [
     {
-      user: String,
+      createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       ts: String,
       type: String,
       channelName: String,
+      channelId: String,
       text: String,
-      files: [{ id: String, displayName: String, fileType: String, downloadUrl: String }],
+      files: [{ slackId: String, displayName: String, fileType: String, downloadUrl: String }],
     },
   ],
 });
 
 const userSchema = new mongoose.Schema({
+  _id: Schema.Types.ObjectId,
   slackId: { type: String, unique: true },
   profilePhoto: String,
   displayName: String,
@@ -55,14 +58,13 @@ module.exports = {
       const channels = await Channel.find();
       return channels;
     } catch (err) {
+      console.log('Error fetching channels: ', err);
       return err;
     }
   },
   fetchMessages: async channelName => {
     try {
-      console.log(channelName);
-      const messages = await Message.find({ channelName: channelName });
-      console.log(messages);
+      const messages = await Message.find({ channelName: channelName }).populate('createdBy');
       return messages;
     } catch (err) {
       console.log('Error posting a message: ', err);
