@@ -11,6 +11,7 @@ const {
   fetchChannels,
   fetchMessage,
   fetchMessages,
+  fetchMessagesTextSearch
 } = require('../../db/model/channel');
 
 // router.use(express.json());
@@ -47,6 +48,16 @@ router.get('/:channelId/messages/:messageId', async (req, res) => {
   const { channelId, messageId } = req.params;
   try {
     const results = await fetchMessage(channelId, messageId);
+    res.status(200).send(results);
+  } catch (err) {
+    res.status(404).send(err);
+  }
+});
+
+router.get('/messages', async (req, res) => {
+  const { text } = req.query;
+  try {
+    const results = await fetchMessagesTextSearch(text);
     res.status(200).send(results);
   } catch (err) {
     res.status(404).send(err);
