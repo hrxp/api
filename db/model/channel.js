@@ -35,6 +35,8 @@ const messageSchema = new mongoose.Schema({
   ],
 });
 
+messageSchema.index({text: 'text'});
+
 const userSchema = new mongoose.Schema({
   _id: Schema.Types.ObjectId,
   slackId: { type: String, unique: true },
@@ -52,6 +54,17 @@ const User = mongoose.model('User', userSchema);
 // Create an instance (document) of the messageSchema
 const Message = mongoose.model('Message', messageSchema);
 
+const filterMetaEvents = messages => {
+  return messages.filter(message => {
+    return (
+      !message.text.includes('has joined the channel') &&
+      !message.text.includes('has left the channel') &&
+      !message.text.includes('set the channel topic') &&
+      !message.text.includes(`can't be shown because your team is past the free storage limit`)
+    );
+  });
+};
+
 module.exports = {
   fetchChannels: async channelId => {
     try {
@@ -66,17 +79,20 @@ module.exports = {
     try {
       const messages = await Message.find({ channelName: channelName }).populate('createdBy');
       // TODO: find a better solution to this
-      const messagesWithoutMetaEvents = messages.filter(message => {
-        return (
-          !message.text.includes('has joined the channel') &&
-          !message.text.includes('has left the channel') &&
-          !message.text.includes('set the channel topic') &&
-          !message.text.includes(`can't be shown because your team is past the free storage limit`)
-        );
-      });
+      const messagesWithoutMetaEvents = filterMetaEvents(messages);
       return messagesWithoutMetaEvents;
     } catch (err) {
       console.log('Error posting a message: ', err);
+      return err;
+    }
+  },
+  fetchMessagesTextSearch: async text => {
+    try {
+      const messages = await Message.find({$text: {$search: text}});
+      const messagesWithoutMetaEvents = filterMetaEvents(messages);
+      return messagesWithoutMetaEvents;
+    } catch (err) {
+      console.log('Error fetching messages including text: ', text);
       return err;
     }
   },
