@@ -3,18 +3,18 @@
 // Are we querying for a specific message?
 // How do we handle pagination for messages?
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { example } = require('../../db/model/channel');
+const { example } = require("../../db/model/channel");
 const {
   fetchChannel,
   fetchChannels,
   fetchMessage,
   fetchMessages,
-} = require('../../db/model/channel');
+} = require("../../db/model/channel");
 
 // router.use(express.json());
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const results = await fetchChannels();
     res.status(200).send(results);
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:channelId/messages', async (req, res) => {
+router.get("/:channelId/messages", async (req, res) => {
   const { channelId } = req.params;
   try {
     const results = await fetchMessages(channelId);
@@ -33,7 +33,7 @@ router.get('/:channelId/messages', async (req, res) => {
   }
 });
 
-router.get('/:channelId/messages', async (req, res) => {
+router.get("/:channelId/messages", async (req, res) => {
   const { channelId } = req.params;
   try {
     const results = await fetchMessages(channelId);
@@ -43,7 +43,7 @@ router.get('/:channelId/messages', async (req, res) => {
   }
 });
 
-router.get('/:channelId/messages/:messageId', async (req, res) => {
+router.get("/:channelId/messages/:messageId", async (req, res) => {
   const { channelId, messageId } = req.params;
   try {
     const results = await fetchMessage(channelId, messageId);

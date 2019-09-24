@@ -1,10 +1,10 @@
-const express = require('express');
-const axios = require('axios');
-const querystring = require('querystring');
-const JWT = require('jsonwebtoken');
+const express = require("express");
+const axios = require("axios");
+const querystring = require("querystring");
+const JWT = require("jsonwebtoken");
 const router = express.Router();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'DevSecret';
+const JWT_SECRET = process.env.JWT_SECRET || "DevSecret";
 
 /*
  * Get the JWT_SECRET from `process.env`.
@@ -18,7 +18,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'DevSecret';
  */
 if (!process.env.JWT_SECRET) {
   console.warn(`WARNING: "process.env.JWT_SECRET" is not set.`);
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === "production") {
     process.exit(1);
   }
 }
@@ -27,7 +27,7 @@ if (!process.env.JWT_SECRET) {
  * Likewise, if we're in production, refuse to start if `SLACK_LOGIN_TEAM_ID`
  * is not set. See below for why it's important.
  */
-if (process.env.NODE_ENV === 'production' && !process.env.SLACK_LOGIN_TEAM_ID) {
+if (process.env.NODE_ENV === "production" && !process.env.SLACK_LOGIN_TEAM_ID) {
   console.error(`ERROR: "SLACK_LOGIN_TEAM_ID" is not set, refusing to start.`);
   process.exit(1);
 }
@@ -35,13 +35,13 @@ if (process.env.NODE_ENV === 'production' && !process.env.SLACK_LOGIN_TEAM_ID) {
 /*
  * Routes
  */
-router.post('/access_token', async (req, res) => {
+router.post("/access_token", async (req, res) => {
   const { code } = req.body;
 
   // Via the Slack API, exchange the Slack Authorization Code coming from the
   // frontend for a Slack Access Token
   const accessTokenResponse = await axios.post(
-    'https://slack.com/api/oauth.access',
+    "https://slack.com/api/oauth.access",
     querystring.stringify({
       code: code,
       client_id: process.env.SLACK_LOGIN_CLIENT_ID,
@@ -58,7 +58,7 @@ router.post('/access_token', async (req, res) => {
 
   // Use our new Slack Access Token to get info about the user's Slack account
   const userIdentityResponse = await axios.post(
-    'https://slack.com/api/users.identity',
+    "https://slack.com/api/users.identity",
     querystring.stringify({
       token: accessToken,
     })
@@ -72,7 +72,7 @@ router.post('/access_token', async (req, res) => {
     process.env.SLACK_LOGIN_TEAM_ID &&
     userIdentityResponse.data.team.id !== process.env.SLACK_LOGIN_TEAM_ID
   ) {
-    return res.status(401).send('Error: Slack team does not match.');
+    return res.status(401).send("Error: Slack team does not match.");
   }
 
   // Create a new JWT with a payload that includes the user's Slack info
@@ -80,7 +80,7 @@ router.post('/access_token', async (req, res) => {
     {
       // JWT registered claims
       sub: userIdentityResponse.data.user.id,
-      iss: 'hrxp_api',
+      iss: "hrxp_api",
       // our private claims
       email: userIdentityResponse.data.user.email,
       name: userIdentityResponse.data.user.name,
@@ -88,7 +88,7 @@ router.post('/access_token', async (req, res) => {
     },
     JWT_SECRET,
     {
-      expiresIn: '60d', // token will expire in 60 days
+      expiresIn: "60d", // token will expire in 60 days
     }
   );
 

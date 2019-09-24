@@ -2,7 +2,7 @@
 // Figure out how to reference anoter schema in Mongoose
 // Explore populate to use with the reference https://mongoosejs.com/docs/populate.html
 // Update the openAPI document
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const channelSchema = new mongoose.Schema({
@@ -10,27 +10,41 @@ const channelSchema = new mongoose.Schema({
   name: String,
   topic: String,
   purpose: String,
-  members: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  members: [{ type: Schema.Types.ObjectId, ref: "User" }],
   isArchived: Boolean,
 });
 
 const messageSchema = new mongoose.Schema({
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   ts: String,
   type: String,
   text: String,
   channelName: String,
   channelId: String,
-  files: [{ slackId: String, displayName: String, fileType: String, downloadUrl: String }],
+  files: [
+    {
+      slackId: String,
+      displayName: String,
+      fileType: String,
+      downloadUrl: String,
+    },
+  ],
   replies: [
     {
-      createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
       ts: String,
       type: String,
       channelName: String,
       channelId: String,
       text: String,
-      files: [{ slackId: String, displayName: String, fileType: String, downloadUrl: String }],
+      files: [
+        {
+          slackId: String,
+          displayName: String,
+          fileType: String,
+          downloadUrl: String,
+        },
+      ],
     },
   ],
 });
@@ -44,13 +58,13 @@ const userSchema = new mongoose.Schema({
 });
 
 // Create an instance (document) of the challelSchema
-const Channel = mongoose.model('Channel', channelSchema);
+const Channel = mongoose.model("Channel", channelSchema);
 
 // Create an instance (document) of the userSchema
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 // Create an instance (document) of the messageSchema
-const Message = mongoose.model('Message', messageSchema);
+const Message = mongoose.model("Message", messageSchema);
 
 module.exports = {
   fetchChannels: async channelId => {
@@ -58,25 +72,29 @@ module.exports = {
       const channels = await Channel.find();
       return channels;
     } catch (err) {
-      console.log('Error fetching channels: ', err);
+      console.log("Error fetching channels: ", err);
       return err;
     }
   },
   fetchMessages: async channelName => {
     try {
-      const messages = await Message.find({ channelName: channelName }).populate('createdBy');
+      const messages = await Message.find({
+        channelName: channelName,
+      }).populate("createdBy");
       // TODO: find a better solution to this
       const messagesWithoutMetaEvents = messages.filter(message => {
         return (
-          !message.text.includes('has joined the channel') &&
-          !message.text.includes('has left the channel') &&
-          !message.text.includes('set the channel topic') &&
-          !message.text.includes(`can't be shown because your team is past the free storage limit`)
+          !message.text.includes("has joined the channel") &&
+          !message.text.includes("has left the channel") &&
+          !message.text.includes("set the channel topic") &&
+          !message.text.includes(
+            `can't be shown because your team is past the free storage limit`
+          )
         );
       });
       return messagesWithoutMetaEvents;
     } catch (err) {
-      console.log('Error posting a message: ', err);
+      console.log("Error posting a message: ", err);
       return err;
     }
   },
