@@ -66,7 +66,6 @@ module.exports = {
     try {
       const messages = await Message.find({ channelName: channelName }).populate('createdBy');
       // TODO: find a better solution to this
-      console.log(messages);
       const messagesWithoutMetaEvents = messages.filter(message => {
         return (
           !message.text.includes('has joined the channel') &&
