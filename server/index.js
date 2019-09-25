@@ -48,7 +48,6 @@ app.get('/docs', swaggerUi.setup(
 
 // Routes
 app.use('/channels', expressJwt({ secret: process.env.JWT_SECRET || 'DevSecret' }), channel);
-// app.use('/channels', channel);
 app.use('/auth', auth);
 
 const PORT = process.env.PORT || 3000;

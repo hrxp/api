@@ -3,7 +3,6 @@
 // Are we querying for a specific message?
 // How do we handle pagination for messages?
 const data = require('../../data.json')
-console.log(data);
 const express = require('express');
 const router = express.Router();
 const { example } = require('../../db/model/channel');
