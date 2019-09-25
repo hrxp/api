@@ -34,6 +34,7 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.send('example endpoint');
 });
+
 // OpenAPI documentation
 app.use('/docs', swaggerUi.serve);
 app.get('/docs', swaggerUi.setup(
@@ -47,6 +48,7 @@ app.get('/docs', swaggerUi.setup(
 
 // Routes
 app.use('/channels', expressJwt({ secret: process.env.JWT_SECRET || 'DevSecret' }), channel);
+// app.use('/channels', channel);
 app.use('/auth', auth);
 
 const PORT = process.env.PORT || 3000;

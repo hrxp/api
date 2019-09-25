@@ -2,7 +2,8 @@
 // What would the channel/:channelID return? => I'm thinking we don't need this?
 // Are we querying for a specific message?
 // How do we handle pagination for messages?
-
+const data = require('../../data.json')
+console.log(data);
 const express = require('express');
 const router = express.Router();
 const { example } = require('../../db/model/channel');
@@ -17,26 +18,19 @@ const {
 router.get('/', async (req, res) => {
   try {
     const results = await fetchChannels();
+    results.filter(result => {
+      return !data.restrict.includes(result.name);
+    });
     res.status(200).send(results);
   } catch (err) {
     res.status(404).send(err);
   }
 });
 
-router.get('/:channelId/messages', async (req, res) => {
-  const { channelId } = req.params;
+router.get('/:channelName/messages', async (req, res) => {
+  const { channelName } = req.params;
   try {
-    const results = await fetchMessages(channelId);
-    res.status(200).send(results);
-  } catch (err) {
-    res.status(404).send(err);
-  }
-});
-
-router.get('/:channelId/messages', async (req, res) => {
-  const { channelId } = req.params;
-  try {
-    const results = await fetchMessages(channelId);
+    const results = await fetchMessages(channelName);
     res.status(200).send(results);
   } catch (err) {
     res.status(404).send(err);
