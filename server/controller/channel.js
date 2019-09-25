@@ -17,7 +17,7 @@ const {
 router.get('/', async (req, res) => {
   try {
     const results = await fetchChannels();
-    results.filter(result => {
+    results = results.filter(result => {
       return !data.restrict.includes(result.name);
     });
     res.status(200).send(results);
