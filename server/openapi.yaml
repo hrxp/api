@@ -143,26 +143,7 @@ components:
                 type: string
                 example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
               files:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    _id:
-                      type: string
-                      example: a55dd3e2-1b1c-4ee8-a05e-9a35dda5710a
-                    slackId:
-                      type: string
-                      example: FJ0UW704
-                    displayName:
-                      type: string
-                      example: contractor-description.pdf
-                    fileType:
-                      type: string
-                      example: pdf
-                    downloadUrl:
-                      type: string
-                      format: url
-                      example: "https://hrxp.com/static/files/FJ0UW704E/contractor-description.pdf"
+                $ref: "#/components/schemas/Message/properties/files"
         createdBy:
           $ref: "#/components/schemas/User"
     User:
