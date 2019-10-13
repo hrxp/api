@@ -14,11 +14,19 @@ chai.use(chaiHttp);
 
 describe('channel', () => {
   // Dummy data
+
+  const dummyUser = {
+    id: 'testUser',
+    profilePhoto: 'http://example.com/photo',
+    displayName: 'example name',
+    realName: 'John Doe',
+  };
+
   const dummyChannel = {
     id: 'testChannel',
     topic: 'general',
     purpose: 'testChannel',
-    members: ['member1', 'member2'],
+    members: [dummyUser],
     isArchived: 'yes',
   };
 
@@ -35,13 +43,6 @@ describe('channel', () => {
         downloadUrl: 'http://download.com/pdf',
       },
     ],
-  };
-
-  const dummyUser = {
-    id: 'testUser',
-    profilePhoto: 'http://example.com/photo',
-    displayName: 'example name',
-    realName: 'John Doe',
   };
 
   beforeEach(async () => {
