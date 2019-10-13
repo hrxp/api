@@ -94,7 +94,20 @@ describe('channel', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
-          res.body[0].id.should.equal('testMessage1');
+          res.body[0].id.should.equal('testMessage');
+          done();
+        });
+    });
+  });
+  describe('Text search for messages', () => {
+    it('it should GET all messages with text matching words in a search string', done => {
+      chai
+        .request(server)
+        .get(`/channels/messages?text=example`)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body[0].id.should.equal('testMessage');
           done();
         });
     });

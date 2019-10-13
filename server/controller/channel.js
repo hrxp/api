@@ -55,7 +55,7 @@ router.get('/:channelId/messages/:messageId', async (req, res) => {
 });
 
 router.get('/messages', async (req, res) => {
-  const { text } = req.query;
+  const { text } = req.query.text;
   try {
     const results = await fetchMessagesTextSearch(text);
     res.status(200).send(results);

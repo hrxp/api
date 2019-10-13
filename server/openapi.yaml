@@ -36,22 +36,35 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Message"
-/auth/access_token:
-    post:
-    tags: [Auth]
-    summary: exchange a Slack OAuth authorization code for a JWT
-    requestBody:
-      description: Payload that includes the OAuth Authorization Code from Slack
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              code:
-                type: string
-    responses:
-      200:
-        description: success! JWT in response
+  /channels/messages?text={text_search}:
+    get:
+      tags: [Message]
+      summary: Text-search messages across all channels
+      responses:
+        200:
+          description: OK; data in response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Message"
+  /auth/access_token:
+      post:
+        tags: [Auth]
+        summary: exchange a Slack OAuth authorization code for a JWT
+        requestBody:
+          description: Payload that includes the OAuth Authorization Code from Slack
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+        responses:
+          200:
+            description: success! JWT in response
 components:
   schemas:
     Channel:
